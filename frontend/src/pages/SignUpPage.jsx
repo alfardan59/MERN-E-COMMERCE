@@ -2,10 +2,9 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { UserPlus, Mail, Lock, User, ArrowRight, Loader } from "lucide-react";
 import { motion } from "framer-motion";
-
+import { useUserStore } from "../stores/useUserStore";
 
 const SignUpPage = () => {
-  const loading=false;
 	const [formData, setFormData] = useState({
 		name: "",
 		email: "",
@@ -13,11 +12,11 @@ const SignUpPage = () => {
 		confirmPassword: "",
 	});
 
-
+	const { signup, loading } = useUserStore();
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		console.log(formData);
+		signup(formData);
 	};
 
 	return (
@@ -41,7 +40,7 @@ const SignUpPage = () => {
 					<form onSubmit={handleSubmit} className='space-y-6'>
 						<div>
 							<label htmlFor='name' className='block text-sm font-medium text-gray-300'>
-								Full name
+								Full Name
 							</label>
 							<div className='mt-1 relative rounded-md shadow-sm'>
 								<div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none'>
@@ -62,7 +61,7 @@ const SignUpPage = () => {
 
 						<div>
 							<label htmlFor='email' className='block text-sm font-medium text-gray-300'>
-								Email address
+								Email Address
 							</label>
 							<div className='mt-1 relative rounded-md shadow-sm'>
 								<div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none'>
